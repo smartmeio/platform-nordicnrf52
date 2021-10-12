@@ -55,6 +55,9 @@ variant = board.get("build.variant", "")
 
 use_adafruit = board.get(
     "build.bsp.name", "nrf5") == "adafruit" and "arduino" in env.get("PIOFRAMEWORK", [])
+    
+use_arancino = board.get(
+    "build.bsp.name", "nrf5") == "arancino" and "arduino" in env.get("PIOFRAMEWORK", [])
 
 env.Replace(
     AR="arm-none-eabi-ar",
@@ -125,7 +128,7 @@ env.Append(
     )
 )
 
-if use_adafruit:
+if use_adafruit or use_arancino:
     env.Append(
         BUILDERS=dict(
             PackageDfu=Builder(
@@ -199,6 +202,10 @@ else:
             join("$BUILD_DIR", "${PROGNAME}"),
             env.ElfToHex(join("$BUILD_DIR", "userfirmware"), target_elf))
     elif "nrfutil" == upload_protocol and use_adafruit:
+        target_firm = env.PackageDfu(
+            join("$BUILD_DIR", "${PROGNAME}"),
+            env.ElfToHex(join("$BUILD_DIR", "${PROGNAME}"), target_elf))
+    elif "nrfutil" == upload_protocol and use_arancino:
         target_firm = env.PackageDfu(
             join("$BUILD_DIR", "${PROGNAME}"),
             env.ElfToHex(join("$BUILD_DIR", "${PROGNAME}"), target_elf))
