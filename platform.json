@@ -70,6 +70,12 @@
       "owner": "platformio",
       "version": "~2.4.0"
     },
+    "framework-arduinoarancinonrf52": {
+      "type": "framework",
+      "optional": true,
+      "owner": "smartmeio",
+      "version": "~1.0.0-test.3"
+    },
     "framework-cmsis": {
       "type": "framework",
       "optional": true,
