@@ -42,6 +42,13 @@ class Nordicnrf52Platform(PlatformBase):
                 self.packages["framework-cmsis"]["optional"] = False
                 self.packages["tool-adafruit-nrfutil"]["optional"] = False
 
+            if self.board_config(board).get("build.bsp.name",
+                                            "nrf5") == "arancino":
+                self.frameworks["arduino"][
+                    "package"] = "framework-arduinoarancinonrf52"
+                self.packages["framework-cmsis"]["optional"] = False
+                self.packages["tool-adafruit-nrfutil"]["optional"] = False
+
             if "mbed" in frameworks:
                 deprecated_boards_file = os.path.join(
                     self.get_dir(), "misc", "mbed_deprecated_boards.json")
