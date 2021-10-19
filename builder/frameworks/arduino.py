@@ -27,5 +27,7 @@ board = env.BoardConfig()
 
 if board.get("build.bsp.name", "nrf5") == "adafruit":
     env.SConscript("arduino/adafruit.py")
+elif board.get("build.bsp.name", "nrf5") == "arancino":
+    env.SConscript("arduino/arancino.py")
 else:
     env.SConscript("arduino/nrf5.py")
