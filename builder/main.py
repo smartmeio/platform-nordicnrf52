@@ -124,6 +124,11 @@ env.Append(
 
 upload_protocol = env.subst("$UPLOAD_PROTOCOL")
 
+if board.get("build.bsp.name", "nrf5") == "adafruit":
+	FRAMEWORK_DIR = platform.get_package_dir("framework-arduinoadafruitnrf52")
+elif board.get("build.bsp.name", "nrf5") == "arancino":
+	FRAMEWORK_DIR = platform.get_package_dir("framework-arduinoarancinonrf52")
+
 if "nrfutil" == upload_protocol or (
     board.get("build.bsp.name", "nrf5") == "adafruit" or
     board.get("build.bsp.name", "nrf5") == "arancino"
@@ -153,11 +158,7 @@ if "nrfutil" == upload_protocol or (
                     " ".join(
                         [
                             '"$PYTHONEXE"',
-                            '"%s"' % join(
-                                platform.get_package_dir(
-                                    "framework-arduinoadafruitnrf52"
-                                )
-                                or "",
+                            '"%s"' % join(FRAMEWORK_DIR or "",
                                 "tools",
                                 "pynrfbintool",
                                 "pynrfbintool.py",
