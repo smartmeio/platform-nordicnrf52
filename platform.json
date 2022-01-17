@@ -73,8 +73,8 @@
     "framework-arduinoarancinonrf52": {
       "type": "framework",
       "optional": true,
-      "owner": "platformio",
-      "version": "~1.0.0-test.3"
+      "owner": "smartme-io",
+      "version": "~1.0.0"
     },
     "framework-cmsis": {
       "type": "framework",
